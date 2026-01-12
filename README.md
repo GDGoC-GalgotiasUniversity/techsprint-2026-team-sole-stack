@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Y9iW-vs6)
-# 🚀 [Project Name]
-### Team: [Your Team Name]
-> *A one-sentence tagline or slogan for your project goes here.*
+# 🚀 Gemini Novel
+### Team: Team Sole Stack
+> *Unlock your creativity with the power of Google Gemini.*
 
 ---
 
@@ -9,22 +9,20 @@
 
 | Name | Role | Email |
 | :--- | :--- | :--- |
-| **[Name]** | Team Lead | [Email] |
-| **[Name]** | Member | [Email] |
-| **[Name]** | Member | [Email] |
+| **Utkarsh Anand** | Team Lead / Sole Member | game.developer.utkarsh@gmail.com |
 
 ---
 
 ## 🎯 Problem Statement
-*Describe the specific pain point or challenge here (Keep it under 3 lines).*
-* **Context:** [Why is this a problem?]
-* **Impact:** [Who suffers from this?]
+*Addressing the friction in creative writing and academic research.*
+* **Context:** Students, researchers, and creative writers often struggle with "blank page syndrome" and the time-consuming process of synthesizing vast amounts of information into coherent drafts.
+* **Impact:** This leads to procrastination, reduced productivity, and a barrier to entry for aspiring writers and researchers who lack immediate guidance or feedback.
 
 ## 💡 Solution
-*Describe your approach and how it solves the problem.*
-1.  **Key Point 1:** [Description]
-2.  **Key Point 2:** [Description]
-3.  **Key Point 3:** [Description]
+*An intelligent, context-aware workspace powered by Google Technologies.*
+1.  **AI-Powered Brainstorming:** Leverages Google's Gemini models to generate ideas, outlines, and varying perspectives on any topic instantly.
+2.  **Smart Context Retention:** Maintains conversation history (via Vercel AI SDK) to provide continuity in long-form writing or complex research tasks.
+3.  **Seamless Formatting:** Supports Rich Markdown and LaTeX for technical and academic writing, ensuring the output is ready to publish or submit.
 
 ---
 
@@ -32,28 +30,17 @@
 
 | Category | Technologies Used |
 | :--- | :--- |
-| **Frontend** | React, Tailwind, Vite |
-| **Backend** | Node.js, Express, Python |
-| **Database** | MongoDB, PostgreSQL |
-| **Tools/APIs** | Docker, OpenAI API, AWS |
+| **Frontend** | Next.js 15, React 19, Tailwind CSS v4, Vercel AI SDK (@ai-sdk/google) |
+| **Backend** | Supabase (Database & Auth) |
+| **Tools/APIs** | TypeScript, Bun/Pnpm, Framer Motion (Animations) |
 
 ---
 
 ## 📊 MVP Features
-- [x] **Feature 1:** [Brief description]
-- [x] **Feature 2:** [Brief description]
-- [ ] **Feature 3:** [Brief description - In Progress]
-
----
-
-## 🔗 Links & Demo
-- **🌐 Live Site:** [https://your-app.vercel.app](https://your-app.vercel.app)
-- **📂 GitHub Repo:** [Link to Repo]
-- **📹 Video Demo:** [Link to Video]
-
-> **Testing Credentials**
-> * **User:** `user@demo.com`
-> * **Pass:** `hack2026`
+- [x] **Real-time AI Chat:** Fast, streaming responses using Gemini Flash/Pro models.
+- [x] **Rich Text Support:** Full rendering for Markdown tables, code blocks, and LaTeX math equations.
+- [x] **Responsive UI:** A modern, distinct interface (Gemini-themed) that works on all devices.
+- [ ] **History & Auth:** (In Progress) Saving user sessions and chat history via Supabase.
 
 ---
 

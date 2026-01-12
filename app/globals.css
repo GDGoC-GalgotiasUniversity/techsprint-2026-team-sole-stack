@@ -1,0 +1,401 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@import "highlight.js/styles/github-dark.css";
+
+/* Removed Tailwind v4-only @custom-variant. Keep CSS variables in :root for compatibility. */
+:root {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+  /* App-wide dark overrides */
+  --app-bg: #000000;
+  --panel-bg: #000000;
+  --muted-bg: #050505;
+  --muted-fg: #e6e6e6;
+  --table-row-alt: rgba(255,255,255,0.02);
+  --code-bg: #0d0d0d;
+  --accent: #ea580c;
+  --accent-glow: rgba(234,88,12,0.18);
+  --accent-border: rgba(234,88,12,0.92);
+  --accent-strong: rgba(234,88,12,0.95);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* Make the overall page background black and default text light */
+body {
+  background-color: var(--app-bg) !important;
+  color: var(--muted-fg) !important;
+}
+
+/* Force commonly used light/grey background utilities to appear black in the app
+   This makes 'grey bg and stuff' render as black for a consistent dark aesthetic. */
+.bg-neutral-200,
+.bg-neutral-100,
+.bg-neutral-50,
+.bg-stone-100,
+.bg-stone-50,
+.bg-slate-100 {
+  background-color: var(--panel-bg) !important;
+  color: var(--muted-fg) !important;
+}
+
+/* Darken alternate table rows and hover for better contrast */
+.markdown-body tr:nth-child(even) {
+  background-color: var(--table-row-alt) !important;
+}
+.markdown-body tr:hover {
+  background-color: rgba(0,0,0,0.12) !important;
+}
+
+/* Code / pre blocks */
+.markdown-body pre {
+  background-color: var(--code-bg) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Inline code */
+.markdown-body code:not(pre code) {
+  background-color: rgba(0,0,0,0.35) !important;
+  color: #ff6b4a !important;
+}
+
+/* Scrollbar tweaks for dark theme */
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Mobile-specific layout tweaks for small Android phones (Redmi / Realme / Vivo and similar)
+   These apply at narrow widths commonly found on those devices and improve touch targets. */
+@media only screen and (max-width: 420px) {
+  /* Reduce heading sizes for narrow screens */
+  .markdown-body h1 { font-size: 1.6rem; }
+  .markdown-body h2 { font-size: 1.25rem; }
+  .markdown-body h3 { font-size: 1.1rem; }
+
+  /* Make chat containers full-width and stack vertically */
+  .flex-1, .chat-container, .chat-session, .markdown-body {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Inputs: make textareas and buttons larger and full width for touch */
+  textarea, input[type="text"], .chat-input, .btn {
+    font-size: 1rem !important;
+    padding: 12px !important;
+  }
+
+  button[type="submit"] {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Collapse sidebars on small screens to prioritize chat content */
+  .chat-history-sidebar, .sidebar, .chat-list {
+    display: none !important;
+  }
+
+  /* Provide a compact footer hint area */
+  .footer-hint {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+  }
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+#pic {
+  filter: drop-shadow(2px 6px 12px rgba(100, 51, 30, 0.4));
+}
+#pic:hover {
+  filter: drop-shadow(2px 6px 12px rgba(132, 70, 43, 0.65));
+}
+::selection {
+  background: #d03e09;
+  color: white;
+}
+
+/* Headings */
+.markdown-body h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+.markdown-body h2 {
+  font-size: 2rem; /* 32px */
+}
+
+.markdown-body h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+.markdown-body h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+.markdown-body h5 {
+  font-size: 1.25rem; /* 20px */
+}
+
+.markdown-body h6 {
+  font-size: 1rem; /* 16px */
+}
+
+/* Headings */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+  line-height: 1.15;
+  color: #fff0e8;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+/* Paragraphs */
+.markdown-body p {
+  margin-bottom: 10px;
+}
+
+/* Links */
+.markdown-body a {
+  /* Avoid using Tailwind's @apply here to prevent PostCSS/@apply resolution issues
+     in some dev toolchains (Turbopack). Use the equivalent color directly. */
+  color: #ea580c; /* tailwind text-orange-500 */
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 20px;
+}
+.markdown-body ul li {
+  list-style-type: disc;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid #957b5d;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 15px;
+  color: #a3743d;
+}
+
+.markdown-body pre {
+  background-color: #464646dc;
+  border-left: 3px solid #e3843b;
+  color: white;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.markdown-body code {
+  padding: 2px 4px;
+  font-size: 90%;
+  border-radius: 3px;
+}
+
+/* Tables */
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.markdown-body th {
+  background-color: rgba(234, 88, 12, 0.1);
+  color: #ea580c;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(234, 88, 12, 0.3);
+}
+
+.markdown-body tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.markdown-body tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.markdown-body tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Math rendering */
+.markdown-body .katex {
+  font-size: 1.1em;
+}
+
+.markdown-body .katex-display {
+  margin: 16px 0;
+  text-align: center;
+}
+
+/* Code blocks with syntax highlighting */
+.markdown-body pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.markdown-body pre {
+  background-color: #0d1117 !important;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  border-radius: 6px;
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+/* Inline code */
+.markdown-body code:not(pre code) {
+  background-color: rgba(165, 146, 150, 0.2);
+  color: #f85149;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes bg-pan {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-bg-pan {
+  animation: bg-pan 2.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+}
+
+/* Make buttons and app bars deep gray for a unified dark chrome look
+   and add orange borders and subtle glow */
+button,
+.btn,
+button[type="submit"],
+.chatbox button,
+.chat-container button,
+.floating button,
+.notification button {
+  background-color: #1b1b1b !important; /* deep gray */
+  color: var(--muted-fg) !important;
+  border: 1px solid var(--accent-border) !important; /* more prominent orange border */
+  box-shadow: 0 3px 14px rgba(234,88,12,0.08) !important; /* subtle base glow */
+  transition: box-shadow 220ms ease, transform 120ms ease, border-color 180ms ease;
+}
+
+button:hover,
+.btn:hover,
+button[type="submit"]:hover {
+  background-color: #2a2a2a !important;
+  box-shadow: 0 10px 38px var(--accent-glow) !important; /* stronger glow on hover */
+  transform: translateY(-1px);
+  border-color: var(--accent-strong) !important;
+}
+
+/* Input / bar elements */
+textarea,
+input[type="text"],
+.chat-input,
+.search-input,
+.topbar input,
+.navbar input {
+  background-color: #121212 !important;
+  color: var(--muted-fg) !important;
+  border: 1px solid rgba(234,88,12,0.28) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* App bars / headers / sidebars */
+header,
+.topbar,
+.navbar,
+.site-header,
+.app-bar,
+.top-bar,
+.header-bar,
+.chat-history-sidebar,
+.sidebar,
+.chat-list {
+  background-color: #0f0f0f !important;
+  color: var(--muted-fg) !important;
+  border-bottom: 2px solid var(--accent-border) !important; /* more visible orange accent border */
+  box-shadow: 0 2px 18px rgba(0,0,0,0.6) inset;
+}
+
+/* Make icon buttons slightly muted but visible */
+.icon-button,
+.rounded-icon {
+  background-color: transparent !important;
+  color: var(--muted-fg) !important;
+  opacity: 0.9;
+}
+
+/* Ensure contrast for small UI pieces like badges */
+.badge,
+.count-badge {
+  background-color: rgba(255,255,255,0.06) !important;
+  color: var(--muted-fg) !important;
+}
+
+/* Subtle glow on the robo image in the main bar to match button/header glow */
+#pic {
+  filter: drop-shadow(0 6px 16px rgba(234,88,12,0.12));
+}
+#pic:hover {
+  filter: drop-shadow(0 10px 30px rgba(234,88,12,0.22));
+}
