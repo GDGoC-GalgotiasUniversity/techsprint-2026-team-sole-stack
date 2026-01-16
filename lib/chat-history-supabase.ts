@@ -55,7 +55,7 @@ export class SupabaseChatHistoryManager {
       .range(from, to);
 
     if (error) {
-      console.error("Supabase getChatsPage error:", error);
+      console.error("Supabase getChatsPage error:", JSON.stringify(error, null, 2));
       return [];
     }
 

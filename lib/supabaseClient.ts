@@ -7,5 +7,5 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(supabaseUrl && supabaseAnonKey);
+  return Boolean(supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith("http"));
 }

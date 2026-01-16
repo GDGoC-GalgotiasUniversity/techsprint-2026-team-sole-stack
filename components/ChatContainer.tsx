@@ -11,7 +11,7 @@ import { useNotifications } from "./Notification";
 
 const ChatContainer = memo(({ userIp }: { userIp: string }) => {
   const [selectedModel, setSelectedModel] = useState<Model["value"]>(
-    "compound-beta"
+    models[0].value
   );
   const [input, setInput] = useState("");
   const [currentMessages, setCurrentMessages] = useState<UIMessage[]>([]);
@@ -165,23 +165,25 @@ const ChatContainer = memo(({ userIp }: { userIp: string }) => {
           initialMessages={currentMessages}
           onMessagesChange={handleMessagesChange}
           modelControls={
-            <div className="flex w-full gap-x-2 overflow-x-auto whitespace-nowrap text-xs text-neutral-600 dark:text-neutral-300 sm:text-sm scrollbar-hide shrink-0">
-              <select
-                name="model"
-                title="Select Model"
-                id="model-select"
-                className="block w-full sm:w-auto min-w-44 rounded-xl border border-orange-500 bg-neutral-200 p-3 sm:p-4 text-sm text-neutral-900 focus:outline-hidden focus:ring-2 focus:ring-orange-500 dark:border-orange-500 dark:bg-neutral-800 dark:text-neutral-200 dark:focus:ring-orange-500 sm:text-base"
-                value={selectedModel}
-                onChange={handleModelChange}
-              >
-                {models.map((model) => (
-                  <option key={model.value} value={model.value}>
-                    {model.label}
-                  </option>
-                ))}
-              </select>
+            <div className="flex w-full gap-x-3 overflow-x-auto whitespace-nowrap text-xs sm:text-sm scrollbar-hide shrink-0 py-2 px-1">
+              <div className="relative group">
+                <select
+                  name="model"
+                  title="Select Model"
+                  id="model-select"
+                  className="block w-full sm:w-auto min-w-[160px] rounded-full border border-zinc-700 bg-zinc-900/50 backdrop-blur-md p-2.5 px-4 text-sm text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all hover:bg-zinc-800"
+                  value={selectedModel}
+                  onChange={handleModelChange}
+                >
+                  {models.map((model) => (
+                    <option key={model.value} value={model.value} className="bg-zinc-900 text-zinc-100">
+                      {model.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-              <div className="flex gap-2 text-xs text-neutral-600 dark:text-neutral-300 sm:text-sm w-full items justify-between">
+              <div className="flex gap-2 w-full items-center">
                 {[
                   {
                     label: "Make Shorter",
@@ -192,11 +194,11 @@ const ChatContainer = memo(({ userIp }: { userIp: string }) => {
                     value: "Make it longer. explain it nicely",
                   },
                   {
-                    label: "More Professional",
+                    label: "Professional",
                     value: "Write it in a more professional tone.",
                   },
                   {
-                    label: "More Casual",
+                    label: "Casual",
                     value: "Write it in a more casual and light tone.",
                   },
                   { label: "Paraphrase", value: "Paraphrase it" },
@@ -205,7 +207,7 @@ const ChatContainer = memo(({ userIp }: { userIp: string }) => {
                     key={suggestion.label}
                     type="button"
                     onClick={() => handleSuggestionClick(suggestion.value)}
-                    className="rounded-lg bg-neutral-200 p-2 hover:bg-orange-600 hover:text-neutral-200 dark:bg-neutral-800 dark:hover:bg-orange-600 dark:hover:text-neutral-50 transition-all active:scale-95 flex-1"
+                    className="rounded-full border border-zinc-700/50 bg-zinc-800/40 backdrop-blur-sm px-4 py-2 text-zinc-300 hover:bg-cyan-500/10 hover:text-cyan-400 hover:border-cyan-500/50 transition-all active:scale-95 whitespace-nowrap"
                   >
                     {suggestion.label}
                   </button>

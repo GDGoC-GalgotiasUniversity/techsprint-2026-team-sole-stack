@@ -1,19 +1,14 @@
 const Floating = () => {
   return (
-    <a
-      href="https://bento.anish7.me"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="absolute top-2 right-2 md:right-8 z-40"
-    >
-      {/* <button
-        type="button"
-        className="px-6 backdrop-blur-sm hover:px-8 py-2 rounded-full relative dark:bg-neutral-700/50 dark:text-white text-xs md:text-sm hover:shadow-lg hover:shadow-orange-600/20 tansition-all duration-300 border border-stone-300 dark:border-neutral-700"
-      >
-        <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-linear-to-r from-transparent via-orange-500 to-transparent" />
-        <span className="relative z-20">Made By Preet</span>
-      </button> */}
-    </a>
+    <div className="absolute top-4 right-4 z-40">
+      <div className="px-4 py-1.5 rounded-full glass-panel text-xs text-zinc-400 border border-zinc-800/50 shadow-lg flex items-center gap-2">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+        </span>
+        Team Sole Stack
+      </div>
+    </div>
   );
 };
 

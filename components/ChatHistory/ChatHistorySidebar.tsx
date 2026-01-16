@@ -108,7 +108,7 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
       }
     };
 
-  el.addEventListener("scroll", onScroll, { passive: true });
+    el.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       el.removeEventListener("scroll", onScroll);
@@ -133,17 +133,15 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full z-50 transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full z-50 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         {/* Toggle Button */}
         <button
           type="button"
           onClick={onToggle}
-          className={`absolute top-1/2 -translate-y-1/2 -translate-x-full bg-orange-600 hover:bg-orange-700 text-white p-2 rounded-l-lg shadow-lg transition-all duration-200 z-10 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-            isOpen ? "-scale-90 rounded-full" : ""
-          }`}
+          className={`absolute top-1/2 -translate-y-1/2 -translate-x-full bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded-l-lg shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-200 z-10 focus:outline-none focus:ring-2 focus:ring-cyan-500 ${isOpen ? "-scale-90 rounded-full" : ""
+            }`}
           title={isOpen ? "Close chat history" : "Open chat history"}
           aria-label={isOpen ? "Close chat history" : "Open chat history"}
         >
@@ -162,33 +160,33 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
         </button>
 
         {/* Sidebar Content */}
-        <div className="w-80 sm:w-96 h-full bg-white dark:bg-neutral-900 border-l border-neutral-200 dark:border-neutral-700 shadow-xl flex flex-col">
+        <div className="w-80 sm:w-96 h-full glass-panel border-l border-white/5 shadow-2xl flex flex-col backdrop-blur-xl bg-zinc-950/90">
           {/* Header */}
-          <div className="p-4 border-b border-neutral-200 dark:border-neutral-700">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+          <div className="p-5 border-b border-white/5 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-bold text-zinc-100 tracking-tight">
                 Chat History
               </h2>
-              <button
-                type="button"
-                onClick={onNewChat}
-                className="px-3 py-1.5 text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                title="Start new chat"
-                aria-label="Start new chat"
-              >
-                New Chat
-              </button>
+              <p className="text-xs text-zinc-500 mt-1 font-medium">
+                {chats.length} stored conversations
+              </p>
             </div>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              {chats.length} conversations
-            </p>
+            <button
+              type="button"
+              onClick={onNewChat}
+              className="px-3 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-md transition-all shadow-lg shadow-cyan-900/40 active:scale-95"
+              title="Start new chat"
+              aria-label="Start new chat"
+            >
+              + New Chat
+            </button>
           </div>
 
           {/* Chat List */}
-          <div ref={listRef} className="flex-1 overflow-y-auto p-4">
+          <div ref={listRef} className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
             {chats.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center">
-                <div className="w-16 h-16 mb-4 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+              <div className="flex flex-col items-center justify-center h-full text-center p-6">
+                <div className="w-16 h-16 mb-4 rounded-2xl bg-zinc-900/50 border border-zinc-800 flex items-center justify-center text-zinc-600">
                   <svg
                     width="24"
                     height="24"
@@ -198,16 +196,15 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-neutral-400"
                   >
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 </div>
-                <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-1">
-                  No chat history yet
+                <h3 className="text-sm font-medium text-zinc-300 mb-1">
+                  No conversations yet
                 </h3>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                  Start a conversation to see your chat history here
+                <p className="text-xs text-zinc-500 max-w-[200px]">
+                  Start a new chat to have it saved here automatically.
                 </p>
               </div>
             ) : (
@@ -226,31 +223,35 @@ export const ChatHistorySidebar = memo(function ChatHistorySidebar({
           </div>
 
           {/* Footer */}
-          <div className="p-4 border-t border-neutral-200 dark:border-neutral-700">
-            <div className="text-xs text-neutral-500 dark:text-neutral-400 text-center">
-                {isSupabaseConfigured() ? (
-                  <>
-                    <p>Chats are saved remotely in Supabase</p>
-                    <p className="mt-1">All conversations are persisted to your project</p>
-                    {/* Dev-only migration page removed; local migration handled externally if needed */}
-                    {hasMore && (
-                      <div className="mt-2">
-                        {/* Loader indicator for infinite scroll */}
-                        {loadingMore ? (
-                          <div className="text-sm text-neutral-600">Loading more...</div>
-                        ) : (
-                          <div className="text-sm text-neutral-500">Scroll to load more</div>
-                        )}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <p>Chats are saved locally in your browser</p>
-                    <p className="mt-1">Only the {MAX_CHATS} most recent chats are kept</p>
-                  </>
-                )}
-              </div>
+          <div className="p-4 border-t border-white/5 bg-zinc-900/30">
+            <div className="text-xs text-zinc-500 text-center">
+              {isSupabaseConfigured() ? (
+                <>
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span className="text-zinc-400">Cloud Sync Active</span>
+                  </div>
+                  <p className="opacity-60">Chats synced with Supabase</p>
+                  {hasMore && (
+                    <div className="mt-2">
+                      {loadingMore ? (
+                        <div className="text-cyan-500">Loading old chats...</div>
+                      ) : (
+                        <div className="opacity-50">Scroll for more</div>
+                      )}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                    <span className="text-zinc-400">Local Storage</span>
+                  </div>
+                  <p className="opacity-60">Last {MAX_CHATS} chats saved locally</p>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
