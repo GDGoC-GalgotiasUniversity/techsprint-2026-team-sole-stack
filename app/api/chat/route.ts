@@ -5,7 +5,7 @@ import {
   streamText,
   UIMessage,
 } from "ai";
-import { SYSTEM_PROMPT } from "../../../lib/systemPrompt";
+import { SYSTEM_PROMPT } from "../../../lib/systemPromptLoader";
 
 export const dynamic = "force-dynamic";
 // Removed export of maxDuration per recent request (not used by streamText here)
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     const sanitized: UIMessage[] = sanitizeMessagesForModel(messages);
 
     const result = streamText({
-      model: google(selectedModel ?? "gemini-2.5-flash"),
+      model: google(selectedModel ?? "gemini-2.0-flash"),
       system: SYSTEM_PROMPT,
       messages: convertToModelMessages(sanitized),
       maxRetries: 3,

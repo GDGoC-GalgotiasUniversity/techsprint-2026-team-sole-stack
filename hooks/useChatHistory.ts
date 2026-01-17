@@ -120,35 +120,45 @@ export function useChatHistory(): UseChatHistoryReturn {
 
         let savedChat: SavedChat | null = null;
 
+        // Try Supabase first when configured; on failure, fall back to localStorage.
+        let attemptedSupabase = false;
         if (isSupabaseConfigured()) {
-          // Supabase-backed save/update
-          if (currentChatId) {
-            const ok = await supabaseChatHistoryManager.updateChat(currentChatId, {
-              messages,
-              model,
-            });
+          attemptedSupabase = true;
+          try {
+            // Supabase-backed save/update
+            if (currentChatId) {
+              const ok = await supabaseChatHistoryManager.updateChat(currentChatId, {
+                messages,
+                model,
+              });
 
-            if (ok) {
-              savedChat = await supabaseChatHistoryManager.getChatById(currentChatId);
+              if (ok) {
+                savedChat = await supabaseChatHistoryManager.getChatById(currentChatId);
+              }
+            } else {
+              const created = await supabaseChatHistoryManager.saveChat({ messages, model });
+              if (created) {
+                savedChat = created;
+                setCurrentChatId(savedChat.id);
+              }
             }
-          } else {
-            const created = await supabaseChatHistoryManager.saveChat({ messages, model });
-            if (created) {
-              savedChat = created;
-              setCurrentChatId(savedChat.id);
-            }
-          }
 
-          if (savedChat) {
-            const updatedChats = await supabaseChatHistoryManager.getAllChats();
-            setChats(updatedChats);
-            return savedChat;
-          } else {
-            setError("Failed to save chat");
-            return null;
+            if (savedChat) {
+              const updatedChats = await supabaseChatHistoryManager.getAllChats();
+              setChats(updatedChats);
+              return savedChat;
+            }
+            // If we reach here, Supabase didn't save but didn't throw — fall through to local fallback
+            console.warn("Supabase did not return a saved chat, falling back to localStorage");
+          } catch (err) {
+            // Network or API error — fallback to local storage
+            console.error("Supabase save failed, falling back to localStorage:", err);
+            // Intentionally do not surface UI error to avoid popup; preserve console trace only.
           }
-        } else {
-          // LocalStorage fallback (existing behavior)
+        }
+
+        // LocalStorage fallback (used when Supabase not configured or Supabase save failed)
+        if (!attemptedSupabase || !savedChat) {
           if (currentChatId) {
             const success = chatHistoryManager.updateChat(currentChatId, {
               messages,

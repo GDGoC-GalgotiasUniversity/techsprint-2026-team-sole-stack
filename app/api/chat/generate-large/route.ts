@@ -1,6 +1,6 @@
 import { google } from "@ai-sdk/google";
 import { convertToModelMessages } from "ai";
-import { SYSTEM_PROMPT } from "../../../../lib/systemPrompt";
+import { SYSTEM_PROMPT } from "../../../../lib/systemPromptLoader";
 
 // This route orchestrates chunked generation by repeatedly calling the
 // local `/api/chat` endpoint for successive chunks and streaming the
