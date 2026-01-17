@@ -1,28 +1,39 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Y9iW-vs6)
+
 # 🚀 Gemini Novel
-### Team: Team Sole Stack
+
 > *Unlock your creativity with the power of Google Gemini.*
 
 ---
 
-## 👥 Team Details
+## 👥 Team: Team Sole Stack
 
 | Name | Role | Email |
 | :--- | :--- | :--- |
-| **Utkarsh Anand** | Team Lead / Sole Member | game.developer.utkarsh@gmail.com |
+| **Utkarsh Anand** | Team Leader | game.developer.utkarsh@gmail.com |
 
 ---
 
 ## 🎯 Problem Statement
-*Addressing the friction in creative writing and academic research.*
-* **Context:** Students, researchers, and creative writers often struggle with "blank page syndrome" and the time-consuming process of synthesizing vast amounts of information into coherent drafts.
-* **Impact:** This leads to procrastination, reduced productivity, and a barrier to entry for aspiring writers and researchers who lack immediate guidance or feedback.
+
+### The Challenge: Academic & Creative Writing Friction
+Students and researchers at **Galgotias University** often struggle with organizing vast amounts of research and overcoming "blank page syndrome." The pressure to produce high-quality academic papers and creative narratives can be overwhelming, leading to:
+- Procrastination and missed deadlines.
+- Difficulty in synthesizing complex information.
+- A barrier to entry for expressing innovative ideas effectively.
+
+### The Impact
+This challenge stifles the potential of our campus community, leaving brilliant ideas unshared and academic submissions rushed.
+
+---
 
 ## 💡 Solution
-*An intelligent, context-aware workspace powered by Google Technologies.*
-1.  **AI-Powered Brainstorming:** Leverages Google's Gemini models to generate ideas, outlines, and varying perspectives on any topic instantly.
-2.  **Smart Context Retention:** Maintains conversation history (via Vercel AI SDK) to provide continuity in long-form writing or complex research tasks.
-3.  **Seamless Formatting:** Supports Rich Markdown and LaTeX for technical and academic writing, ensuring the output is ready to publish or submit.
+
+**Gemini Novel** addresses this by providing an intelligent, AI-powered workspace tailored for our academic community, leveraging **Google Technologies**:
+
+*   **Google Gemini Integration:** Acts as an intelligent co-author to brainstorm ideas, outline papers, and refine arguments, directly tackling writer's block.
+*   **Context-Aware Assistance:** Uses **Vercel AI SDK** to maintain deep context of the writing project, allowing for iterative development of complex research papers.
+*   **Structured Output:** Generates content in Markdown and LaTeX, ensuring submissions meet academic formatting standards effortlessly.
 
 ---
 
@@ -32,15 +43,46 @@
 | :--- | :--- |
 | **Frontend** | Next.js 15, React 19, Tailwind CSS v4, Vercel AI SDK (@ai-sdk/google) |
 | **Backend** | Supabase (Database & Auth) |
-| **Tools/APIs** | TypeScript, Bun/Pnpm, Framer Motion (Animations) |
+| **Languages** | TypeScript |
+| **Tools** | Highlight.js, KaTeX, React Markdown |
 
 ---
 
 ## 📊 MVP Features
-- [x] **Real-time AI Chat:** Fast, streaming responses using Gemini Flash/Pro models.
-- [x] **Rich Text Support:** Full rendering for Markdown tables, code blocks, and LaTeX math equations.
-- [x] **Responsive UI:** A modern, distinct interface (Gemini-themed) that works on all devices.
-- [ ] **History & Auth:** (In Progress) Saving user sessions and chat history via Supabase.
+
+- [x] **Real-time AI Chat:** Seamless interaction with Google Gemini Pro/Flash models.
+- [x] **Rich Text & Math Support:** Rendering of Markdown and LaTeX equations for technical writing.
+- [x] **Campus-Ready UI:** A clean, focused interface designed for productivity.
+- [ ] **Session Management:** (In Progress) Save and retrieve writing sessions via Supabase.
+
+---
+
+## 🚀 How to Use It
+
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/GDGoC-GalgotiasUniversity/techsprint-2026-team-sole-stack.git
+    cd techsprint-2026-team-sole-stack
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment**
+    Create a `.env.local` file:
+    ```env
+    GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
+    NEXT_PUBLIC_SUPABASE_URL=your_url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+    ```
+
+4.  **Run Locally**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
